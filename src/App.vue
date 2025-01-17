@@ -1,6 +1,11 @@
 <template>
+  <template>Interactive Vue.js</template>
   <div>
     <h1>Interactive Vue.js Concepts</h1>
+    <p>This is a text : {{ calculateBooksMessage() }}</p>
+
+    <p>Using text interpolation: {{ rawHtml }}</p>
+    <p>Using v-html directive: <span v-html="rawHtml"></span></p>
     <!-- Displaying dynamic greeting and time -->
     <div>
       <h2>{{ greet }} {{ name }}!</h2>
@@ -9,8 +14,27 @@
 
     <!-- Dynamic HTML content injection -->
     <div v-html="hack"></div>
+    <a v-bind:href="url"> This contains URL... </a>
+    <hr />
+
+    <a v-on:click="doSomething"> ... </a>
+
+    <!-- shorthand -->
+    <a @click="doSomething"> ... </a>
+
+    <!-- shorthand -->
+    <a :href="url"> ... </a>
     <h2 v-bind:id="heading">This is a Heading</h2>
     <button v-bind:disabled="isDisabled">Submit</button>
+
+    <!--
+      Note that there are some constraints to the argument expression,
+      as explained in the "Dynamic Argument Value Constraints" and "Dynamic Argument Syntax Constraints" sections below.
+      -->
+    <a v-bind:[attributeName]="url"> ... </a>
+
+    <!-- shorthand -->
+    <a :[attributeName]="url"> ... </a>
 
     <!-- Conditional class binding using v-bind:class -->
     <h2 v-bind:class="underline">{{ underline }}</h2>
@@ -142,6 +166,46 @@
       <input v-model="userMessage" placeholder="Type your message" />
       <p>Your message: {{ userMessage }}</p>
     </div>
+
+    <hr />
+
+    <div>
+      <h2>Event Handling</h2>
+      <h3>userName: {{ EventUserName }}</h3>
+      <button v-on:click="EventUserName = 'Mario'">Change UserName</button>
+    </div>
+
+    <div>
+      <h2>{{ counter }}</h2>
+      <button @click="counter++">Increment</button>
+
+      <!-- Button Event Handling -->
+      <button @click="handleClick">Click Me</button>
+      <p>{{ buttonClickMessage }}</p>
+
+      <!-- Form Handling -->
+      <form @submit.prevent="handleSubmit">
+        <div>
+          <label for="Fullname">FullName:</label>
+          <input type="text" v-model="name" id="name" required />
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" v-model="email" id="email" required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <p v-if="submitted">
+        Form submitted with Name: {{ name }} and Email: {{ email }}
+      </p>
+    </div>
+
+    <!-- Modifier Example: .stop and .once -->
+    <div @click.stop="handleOuterClick" class="outer-div">
+      <div @click.once="handleInnerClick" class="inner-div">
+        Click here (Inner Div)
+      </div>
+    </div>
   </div>
 </template>
 
@@ -150,10 +214,19 @@ export default {
   name: "App",
   data() {
     return {
+      buttonClickMessage: "",
+      Fullname: "",
+      email: "",
+      submitted: false,
+      counter: 0,
+      EventUserName: "Sachin",
+      rawHtml: "<b>This is Bold tag</b>",
       greet: "Hello",
       name: "Sachin!",
       time: "<b>08:00 PM</b>",
       hack: `<a href="#" onclick="alert('you have been hacked!')"><u>Win a Prize</u></a>`,
+      url: "https://www.google.com",
+      doSomething: "doSomething",
       heading: "heading",
       isDisabled: true,
       underline: "This is a underline text",
@@ -198,9 +271,20 @@ export default {
       formStatus: "",
       isTextVisible: false,
       userMessage: "",
+      author: {
+        name: "John Doe",
+        books: [
+          "Vue 2 - Advanced Guide",
+          "Vue 3 - Basic Guide",
+          "Vue 4 - The Mystery",
+        ],
+      },
     };
   },
   methods: {
+    calculateBooksMessage() {
+      return this.author.books.length > 0 ? "Yes" : "No";
+    },
     add(a, b, c) {
       return a + b + c;
     },
@@ -212,6 +296,23 @@ export default {
     },
     toggleDisplay() {
       this.isTextVisible = !this.isTextVisible;
+    },
+    handleClick() {
+      this.buttonClickMessage = "Button was clicked!";
+    },
+    handleSubmit() {
+      // Show an alert with the form data
+      alert(`Form submitted!\nName: ${this.name}\nEmail: ${this.email}`);
+
+      // mark the form as submitted
+      this.submitted = true;
+    },
+
+    handleOuterClick() {
+      alert("Outer div clicked!");
+    },
+    handleInnerClick() {
+      alert("Inner div clicked!");
     },
   },
 };
@@ -241,5 +342,22 @@ div .underline {
 
 .sold-out {
   color: grey;
+}
+
+form {
+  margin-top: 20px;
+}
+input {
+  margin: 5px;
+}
+.outer-div {
+  background-color: lightblue;
+  padding: 20px;
+}
+
+.inner-div {
+  background-color: lightgreen;
+  padding: 20px;
+  margin-top: 10px;
 }
 </style>
