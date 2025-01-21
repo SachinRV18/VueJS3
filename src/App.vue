@@ -41,9 +41,9 @@ export default {
           icon: 'pi pi-search',
           items: [
             {
-              label: 'Components',
+              label: 'Vue Learnings',
               icon: 'pi pi-bolt',
-              command: () => this.onMenuItemClick('/component'), // Route to Projects Components
+              command: () => this.onMenuItemClick('/vuePractices'), // Route to Projects Components
             },
             {
               label: 'Developer-Task-Board',
