@@ -249,8 +249,35 @@
      <button @click="changeFullName">Change full name</button>
      <h2>Full name - {{ firstName }} {{ lastName }}</h2>
     <h2>using computed properties - {{ computedFullname }} </h2>
+  </div>
+  <div>
+    <hr>
+    <!-- Watchers -->
+    <h2>Volume Tracker {0-20}</h2>
+    <h2>Current volume - {{ volume }}</h2>
+    <div>
+      <button @click="volume += 2">Increase</button>
+      <button @click="volume -= 2">Decrease</button>
+
+      <hr>
+      <label for="Movie">Movie</label>
+      <input type="text" v-model="movie">
+      <br>
+      <label for="Movie">Movie title</label>
+      <input type="text" v-model="movieInfo.title">
+      <br>
+      <label for="Movie">Movie rating</label>
+      <input type="text" v-model="movieInfo.rating">
+      <br>
+      <label for="Movie">Movie to add:</label>
+      <!-- <button @click="movieList = movieList.concat(['wonder Women'])">add movie</button> // comment deep property in watcher -->
+      <button @click="movieList.push('wonder Women')">add movie</button>
+
+
+    </div>
 
   </div>
+
 </template>
 
 <script>
@@ -343,7 +370,14 @@ export default {
           price: 300
         }
       ],
-      country:''
+      country:'',
+      volume: 0,
+      movie: 'Batman',
+      movieInfo: {
+        title: '',
+        rating: '',
+      },
+      movieList: ['Batman', 'superman']
     };
   },
   methods: {
@@ -411,6 +445,31 @@ export default {
       return this.items.filter(item => item.price > 100);
     }
   },
+  watch: {
+    volume(newVolume, oldVolume){
+      if(newVolume > oldVolume && newVolume === 16){
+        alert('Volume is too high, it may damage your ears...');
+      }
+    },
+    movie: {
+      handler(newMovie) {
+      console.log(`calling API with movie name = ${newMovie}`);
+    },
+    immediate: true,
+    },
+    movieInfo: {
+      handler(newValue){
+        console.log(`Movie title is ${newValue.title} and rating is ${newValue.rating}`);
+      },
+      deep: true
+    },
+    movieList: {
+      handler(newValue){
+        console.log(`Movie list updated with ${newValue}`);
+      },
+      deep: true
+    }
+  }
 };
 </script>
 

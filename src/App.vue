@@ -4,8 +4,18 @@
     <Menubar :model="items" class="simple-menubar" @item-click="onMenuItemClick" />
 
     <div class="content">
+      <!-- <Greet name="Herok" user-age="20" />
+      <Greet name="Ganesh" user-age="27" />
+      <Greet name="Akshay" user-age="29" /> -->
+      <!-- Dynamic content -->
+      <!-- <Greet :name="Name" :user-age="userAge" />  -->
+
+      <Articles id='my-article' title="The Jack Sparrow" :count="50" :isPublished="true" />
+
+
+
       <!-- The router-view will display the corresponding component for the route -->
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>
@@ -14,12 +24,19 @@
 import Menubar from 'primevue/menubar'
 import 'primeicons/primeicons.css'
 
+// import Greet from './components/greet.vue'
+import Articles from './components/Articles.vue'
+
 export default {
   components: {
     Menubar,
+    // Greet,
+    Articles
   },
   data() {
     return {
+      Name: 'Sachin',
+      userAge: 25,
       items: [
         {
           label: 'Home',
@@ -48,7 +65,8 @@ export default {
             {
               label: 'Developer-Task-Board',
               icon: 'pi pi-server',
-              command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
+              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
+              command: () => this.$router.push({ name: 'projects' }), // Navigate to Projects when task board is clicked
             },
           ],
         },
@@ -60,10 +78,10 @@ export default {
     onMenuItemClick(route) {
       this.$router.push(route) // Navigate to the selected page route
     },
-    onTaskBoardClick() {
-      // Navigate directly to the projects page when task-board is clicked
-      this.$router.push({ name: 'projects' }) // This will navigate to the '/projects' route
-    },
+    // onTaskBoardClick() {
+    //   // Navigate directly to the projects page when task-board is clicked
+    //   this.$router.push({ name: 'projects' }) // This will navigate to the '/projects' route
+    // },
   },
 }
 </script>

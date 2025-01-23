@@ -1,62 +1,60 @@
 <template>
-  <div id="app">
-    <h2 class="heading">Developer Story Board</h2>
+  <h2 class="heading">Developer Story Board</h2>
 
-    <div class="task-form-container">
-      <TaskForm @add-task="addTask" />
-    </div>
+  <div class="task-form-container">
+    <TaskForm @add-task="addTask" />
+  </div>
 
-    <div class="task-table">
-      <table class="p-datatable p-component">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Timer</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="task in tasks" :key="task.id">
-            <td>{{ task.title }}</td>
-            <td class="task-description">{{ task.description }}</td>
-            <td>{{ task.priority }}</td>
-            <td>{{ task.status }}</td>
-            <td>{{ formattedTime(task) }}</td>
-            <td>
-              <div class="task-controls">
-                <CreateButton
-                  v-if="task.status === 'To Do'"
-                  label="Start"
-                  @click="startTask(task)"
-                  class="p-button-primary"
-                />
-                <CreateButton
-                  v-if="task.status === 'In Progress' && task.timerRunning"
-                  label="Pause"
-                  @click="pauseTask(task)"
-                  class="p-button-secondary"
-                />
-                <CreateButton
-                  v-if="task.status === 'In Progress' && !task.timerRunning"
-                  label="Resume"
-                  @click="resumeTask(task)"
-                  class="p-button-success"
-                />
-                <CreateButton
-                  v-if="task.status === 'In Progress' && task.timerRunning"
-                  label="Stop"
-                  @click="stopTask(task)"
-                  class="p-button-danger"
-                />
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="task-table">
+    <table class="p-datatable p-component">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Timer</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="task in tasks" :key="task.id">
+          <td>{{ task.title }}</td>
+          <td class="task-description">{{ task.description }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ formattedTime(task) }}</td>
+          <td>
+            <div class="task-controls">
+              <CreateButton
+                v-if="task.status === 'To Do'"
+                label="Start"
+                @click="startTask(task)"
+                class="p-button-primary"
+              />
+              <CreateButton
+                v-if="task.status === 'In Progress' && task.timerRunning"
+                label="Pause"
+                @click="pauseTask(task)"
+                class="p-button-secondary"
+              />
+              <CreateButton
+                v-if="task.status === 'In Progress' && !task.timerRunning"
+                label="Resume"
+                @click="resumeTask(task)"
+                class="p-button-success"
+              />
+              <CreateButton
+                v-if="task.status === 'In Progress' && task.timerRunning"
+                label="Stop"
+                @click="stopTask(task)"
+                class="p-button-danger"
+              />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -136,12 +134,6 @@ export default {
 
 <style scoped>
 /* General Styles */
-#app {
-  color: #333;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 20px;
-  margin: 0 auto;
-}
 
 .heading {
   font-size: 32px;
