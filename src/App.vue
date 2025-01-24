@@ -2,6 +2,8 @@
   <div class="card">
     <!-- Menubar with item-click event binding -->
     <Menubar :model="items" class="simple-menubar" @item-click="onMenuItemClick" />
+    <!-- <h2>AppComponent - {{ name }}</h2> -->
+
 
     <div class="content">
       <!-- <Greet name="Herok" user-age="20" />
@@ -10,9 +12,7 @@
       <!-- Dynamic content -->
       <!-- <Greet :name="Name" :user-age="userAge" />  -->
 
-      <Articles id='my-article' title="The Jack Sparrow" :count="50" :isPublished="true" />
-
-
+      <!-- <Articles id='my-article' title="The Jack Sparrow" :count="50" :isPublished="true" /> -->
 
       <!-- The router-view will display the corresponding component for the route -->
       <router-view />
@@ -26,16 +26,21 @@ import 'primeicons/primeicons.css'
 
 // import Greet from './components/greet.vue'
 import Articles from './components/Articles.vue'
+import ProjectsView from './views/ProjectsView.vue';
+
 
 export default {
+  name: 'App',
   components: {
     Menubar,
     // Greet,
-    Articles
+    Articles,
+    ProjectsView,
   },
   data() {
     return {
       Name: 'Sachin',
+      name: 'Ganesh',
       userAge: 25,
       items: [
         {
@@ -68,6 +73,18 @@ export default {
               // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
               command: () => this.$router.push({ name: 'projects' }), // Navigate to Projects when task board is clicked
             },
+            {
+              label: 'Vue Learnings - 2',
+              icon: 'pi pi-server',
+              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
+              command: () => this.onMenuItemClick('/vuePractices2'), // Navigate to Projects when task board is clicked
+            },
+            {
+              label: 'Sign In Form',
+              icon: 'pi pi-server',
+              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
+              command: () => this.onMenuItemClick('/signinForm'), // Navigate to Projects when task board is clicked
+            },
           ],
         },
       ],
@@ -82,6 +99,11 @@ export default {
     //   // Navigate directly to the projects page when task-board is clicked
     //   this.$router.push({ name: 'projects' }) // This will navigate to the '/projects' route
     // },
+  },
+  provide() {
+    return{
+    username: this.name,
+    }
   },
 }
 </script>

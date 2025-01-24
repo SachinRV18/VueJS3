@@ -1,5 +1,8 @@
 <template>
-  <h2 class="heading">Developer Story Board</h2>
+  <h2>{{ username }}</h2>
+  <h2 class="heading">Welcome, {{ username }}! Developer Story Board</h2>
+
+
 
   <div class="task-form-container">
     <TaskForm @add-task="addTask" />
@@ -63,6 +66,8 @@ import CreateButton from 'primevue/button'
 import TaskForm from '@/components/TaskForm.vue'
 
 export default {
+  name: 'ProjectsView',
+  inject: ['username'],
   components: {
     TaskForm,
     CreateButton, // Register Button component here
