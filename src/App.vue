@@ -65,25 +65,27 @@ export default {
             {
               label: 'Vue Learnings',
               icon: 'pi pi-bolt',
-              command: () => this.onMenuItemClick('/vuePractices'), // Route to Projects Components
+              command: () => this.onMenuItemClick('/vuePractices'),
             },
             {
               label: 'Developer-Task-Board',
               icon: 'pi pi-server',
-              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
-              command: () => this.$router.push({ name: 'projects' }), // Navigate to Projects when task board is clicked
+              command: () => this.$router.push({ name: 'projects' }),
             },
             {
               label: 'Vue Learnings - 2',
               icon: 'pi pi-server',
-              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
-              command: () => this.onMenuItemClick('/vuePractices2'), // Navigate to Projects when task board is clicked
+              command: () => this.onMenuItemClick('/vuePractices2'),
             },
             {
               label: 'Sign In Form',
               icon: 'pi pi-server',
-              // command: () => this.onTaskBoardClick(), // Navigate to Projects when task board is clicked
-              command: () => this.onMenuItemClick('/signinForm'), // Navigate to Projects when task board is clicked
+              command: () => this.onMenuItemClick('/signinForm'),
+            },
+            {
+              label: 'Sign Up Form',
+              icon: 'pi pi-server',
+              command: () => this.onMenuItemClick('/signupForm'),
             },
           ],
         },
