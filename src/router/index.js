@@ -7,6 +7,7 @@ import VuePracticesView from '../views/VuePractices.vue'
 import VuePractices2View from '../views/VuePractice2.vue'
 import SigninFormView from '../components/SigninForm.vue'
 import SignupFormView from '../components/SignUpForm.vue'
+import PrimeVueThemes from '../components/PrimeVueThemes.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,11 @@ const router = createRouter({
       path: '/signupForm',
       name: 'signupForm',
       component: SignupFormView,
+    },
+    {
+      path: '/primeVueThemes',
+      name: 'primeVueThemes',
+      component: PrimeVueThemes,
     },
   ],
 })

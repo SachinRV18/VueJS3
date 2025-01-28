@@ -65,7 +65,7 @@ export default {
             {
               label: 'Vue Learnings',
               icon: 'pi pi-bolt',
-              command: () => this.onMenuItemClick('/vuePractices'),
+              command: () => this.onMenuItemClick('/vuePractices'), // Route to Projects Components
             },
             {
               label: 'Developer-Task-Board',
@@ -86,6 +86,11 @@ export default {
               label: 'Sign Up Form',
               icon: 'pi pi-server',
               command: () => this.onMenuItemClick('/signupForm'),
+            },
+            {
+              label: 'Prime Vue Themes',
+              icon: 'pi pi-server',
+              command: () => this.onMenuItemClick('/primeVueThemes'),
             },
           ],
         },
